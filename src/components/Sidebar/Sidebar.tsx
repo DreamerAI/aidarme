@@ -20,6 +20,8 @@ export const Sidebar = (props: Props) => {
 
     return (
         <div>
+
+            {/* TEST */}
             <ul className='hidden md:flex flex-col gap-3 md:animate-slideOut md:group-hover:animate-slideIn'>
                 <SidebarItems><Home className="w-8 h-8" /></SidebarItems>
                 <SidebarItems><Skills className="w-8 h-8" /></SidebarItems>
