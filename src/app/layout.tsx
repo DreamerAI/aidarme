@@ -17,16 +17,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className='scroll-smooth'>
       <body className={inter.className}>
-        <div className='fixed animate-logoSlide inset-0 z-50 bg-white min-h-screen flex items-center justify-center'>
+        {/* <div className='fixed animate-logoSlide inset-0 z-50 bg-white min-h-screen flex items-center justify-center'>
           <Logo className=" w-[250px] h-[250px]" />
-        </div>
+        </div> */}
         <div className='flex relative'>
           <div className='fixed flex group items-end h-full pl-6 md:items-center pb-4 md:pb-0'>
             <Sidebar />
           </div>
-          <div className='max-w-screen-xl mx-auto'>
+          <div className='mx-auto'>
             {children}
           </div>
         </div>
