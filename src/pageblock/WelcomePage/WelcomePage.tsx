@@ -4,7 +4,7 @@ type Props = {}
 
 export const WelcomePage = (props: Props) => {
     return (
-        <div className=" h-[100dvh] text-black w-[100vw] flex flex-col items-center justify-center bg-cover bg-[url('/images/pattern2.png')] ">
+        <div className="min-h-screen h-full text-black w-[100vw] flex flex-col items-center justify-center bg-fixed bg-[url('/images/pattern.png')] ">
             <div>
                 <h1 className='text-clamp font-bold'>AIDAR.</h1>
             </div>
