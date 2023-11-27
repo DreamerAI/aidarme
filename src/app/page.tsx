@@ -2,7 +2,7 @@ import { WelcomePage } from "@/pageblock/WelcomePage/WelcomePage";
 
 export default function Home() {
     return (
-        <div className="flex items-center justify-start p-8 md:p-0 flex-col">
+        <div className="flex items-center justify-start md:p-0 flex-col">
             <WelcomePage />
             <div className="flex px-16 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim blandit volutpat maecenas volutpat. Leo vel fringilla est ullamcorper eget nulla. Venenatis cras sed felis eget velit aliquet sagittis. Lectus arcu bibendum at varius vel pharetra. Tristique nulla aliquet enim tortor at auctor urna nunc. Commodo elit at imperdiet dui accumsan sit amet nulla facilisi. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Et malesuada fames ac turpis egestas sed tempus urna. Elit pellentesque habitant morbi tristique senectus et. Turpis tincidunt id aliquet risus feugiat in ante metus. Erat velit scelerisque in dictum non consectetur a erat nam. Ut eu sem integer vitae justo eget magna fermentum iaculis. A arcu cursus vitae congue mauris rhoncus aenean. Justo nec ultrices dui sapien eget mi proin sed libero. Risus in hendrerit gravida rutrum quisque non tellus orci ac. Facilisis gravida neque convallis a cras semper auctor. In ante metus dictum at tempor commodo ullamcorper.
 
