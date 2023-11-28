@@ -8,7 +8,7 @@ export const WelcomePage = (props: Props) => {
             <div>
                 <h1 className='text-clamp font-bold'>AIDAR.</h1>
             </div>
-            <div className='flex justify-around w-full text-4xl md:flex-row flex-col text-center'>
+            <div className='flex justify-around mt-6 gap-2 w-full text-xl md:flex-row flex-col text-center sm:text-4xl'>
                 <p>Frontend Developer</p>
                 <p>UI/UX Designer</p>
             </div>
