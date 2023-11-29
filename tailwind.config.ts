@@ -9,8 +9,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+
+      spacing: {
+        aboutmeImg: "clamp(10rem, 20vw, 30rem)",
+      },
+
       fontSize: {
-        clamp: "clamp(5rem, 20vw, 35rem)",
+        headline: "clamp(5rem, 20vw, 35rem)",
+        aboutme: "clamp(1.2rem, 2vw, 1.5rem)",
+
       },
 
       colors: {

@@ -37,9 +37,9 @@ export const Sidebar = (props: Props) => {
                     <SidebarItems><Contact className="w-8 h-8" /></SidebarItems>
                 </ul>
                 <button onClick={toggleMobileSidebar}>
-                    {showSidebar ? <div className='group w-12 h-12 bg-white rounded-full flex justify-center items-center shadow-[0px_0px_5px_2px_#cbd5e0] hover:bg-main-dark hover:text-white duration-500 transition-all'><ArrowTop className="w-10 h-10" /></div> : <div className='group w-12 h-12 bg-white rounded-full flex justify-center items-center shadow-[0px_0px_5px_2px_#cbd5e0] hover:bg-main-dark hover:text-white duration-500 transition-all'><ArrowBottom className="w-10 h-10" /></div>}
+                    {showSidebar ? <div className='group w-12 h-12 bg-white rounded-full flex justify-center items-center shadow-[0px_0px_5px_2px_#cbd5e0] hover:bg-main-dark hover:text-white duration-500 transition-all'><ArrowBottom className="w-10 h-10" /></div> : <div className='group w-12 h-12 bg-white rounded-full flex justify-center items-center shadow-[0px_0px_5px_2px_#cbd5e0] hover:bg-main-dark hover:text-white duration-500 transition-all'><ArrowTop className="w-10 h-10" /></div>}
                 </button>
             </div>
-        </ >
+        </>
     );
 };

@@ -23,7 +23,7 @@ export default function RootLayout({
           <Logo className=" w-[250px] h-[250px]" />
         </div> */}
         <div className='flex relative'>
-          <div className='fixed flex items-end right-0 group z-50 h-full pr-6 md:items-center md:pl-6 pb-4 md:pb-0 md:left-0'>
+          <div className='fixed flex items-end w-20 justify-center right-0 md:left-0 group z-50 h-full pr-0 md:items-center md:pl-6 md:pr-0 pb-4 md:pb-0'>
             <Sidebar />
           </div>
           <div className='mx-auto'>
