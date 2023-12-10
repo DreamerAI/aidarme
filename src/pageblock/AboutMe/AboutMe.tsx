@@ -1,19 +1,27 @@
+import { AboutMeCard } from '@/components'
 import Image from 'next/image'
 import React from 'react'
-type Props = {}
 
-export const AboutMe = (props: Props) => {
+export const AboutMe = () => {
     return (
         <>
-            <div className='pt-10 w-full md:w-1/2 max-w-4xl flex flex-col gap-10 text-aboutme font-light'>
-                <h3 className='text-5xl font-semibold uppercase md:text-left'>Aidar Abdykayimov</h3>
-                <p>I&apos;m a very cool frontender. I developed many sites and projects.</p>
-                <p className='tracking-tight'>
-                    I am your friendly AI assistant, always ready to lend a helping hand. Whether you&apos;re seeking advice information, or simply a friendly chat, I&apos;m here to cater to your needs. From answering your burning questions to providing insightful suggestions, I&apos;m equipped with a vast knowledge base to assist you on a wide range of topics.
-                </p>
+            <div className='md:pt-10 w-full md:w-1/2 max-w-4xl flex flex-col gap-10 text-aboutme tracking-tight'>
+                <h3 className='md:text-5xl text-4xl font-semibold uppercase md:text-left'> Aidar Abdykayimov</h3>
+                <div className='flex flex-col gap-10 leading-paragraph font-normal'>
+                    <p>I am a passionate and experienced frontend developer and UI designer with a passion for creating user-friendly and visually appealing web interfaces.
+                        I have a strong understanding of HTML, CSS, and JavaScript, and I am proficient in React.
+                        I am also skilled in UI design principles and can create high-fidelity mockups that translate seamlessly into functional web interfaces.</p>
+                </div>
+
+                <div className='grid md:grid-cols-2 md:grid-rows-2 gap-4'>
+                    <AboutMeCard value={2005} title='projects' />
+                    <AboutMeCard value={2005} title='projects' />
+                    <AboutMeCard value={2005} title='projects' />
+                    <AboutMeCard value={2005} title='projects' />
+                </div>
             </div>
-            <div className='md:px-0 h-1/2 flex justify-center '>
-                <Image src="/images/aidar.png" alt="Picture of the author" width={500} height={500} />
+            <div className='md:px-0'>
+                <Image src="/images/aidar.png" alt="Picture of the author" className='rounded-lg' width={350} height={350} />
             </div>
         </>
     )

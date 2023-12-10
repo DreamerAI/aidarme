@@ -19,9 +19,6 @@ export default function RootLayout({
   return (
     <html lang="en" className='scroll-smooth'>
       <body className={inter.className}>
-        {/* <div className='fixed animate-logoSlide inset-0 z-50 bg-white min-h-screen flex items-center justify-center'>
-          <Logo className=" w-[250px] h-[250px]" />
-        </div> */}
         <div className='flex relative'>
           <div className='fixed flex items-end w-20 justify-center right-0 md:left-0 group z-50 h-full pr-0 md:items-center md:pl-6 md:pr-0 pb-4 md:pb-0'>
             <Sidebar />

@@ -8,3 +8,9 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
+
+@layer components {
+  .card-hover {
+    @apply cursor-pointer transition-all hover:translate-x-1 hover:-translate-y-1 hover:shadow-[-4px_4px_0px_0px_#000];
+  }
+}
