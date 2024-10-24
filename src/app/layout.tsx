@@ -2,7 +2,6 @@ import { Sidebar } from '@/components'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Logo from '../components/shared/assets/icons/Logo.svg';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +15,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en" className='scroll-smooth'>
       <body className={inter.className}>
@@ -23,7 +23,7 @@ export default function RootLayout({
           <div className='fixed flex items-end w-20 justify-center right-0 md:left-0 group z-50 h-full pr-0 md:items-center md:pl-6 md:pr-0 pb-4 md:pb-0'>
             <Sidebar />
           </div>
-          <div className='mx-auto'>
+          <div>
             {children}
           </div>
         </div>

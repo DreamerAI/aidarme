@@ -11,6 +11,12 @@ body {
 
 @layer components {
   .card-hover {
-    @apply cursor-pointer transition-all hover:translate-x-1 hover:-translate-y-1 hover:shadow-[-4px_4px_0px_0px_#000];
+    @apply border-[1px] border-main-dark cursor-pointer transition-all hover:translate-x-1 hover:-translate-y-1 hover:shadow-[-4px_4px_0px_0px_#000];
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
   }
 }
