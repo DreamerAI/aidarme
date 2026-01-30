@@ -37,7 +37,7 @@ export const AboutMe = () => {
 
                     <div className='grid grid-cols-2 grid-rows-2 gap-4'>
                         {aboutMeData.map((item, index) => (
-                            <AboutMeCard key={index} title={item.title} value={item.value} />
+                            <AboutMeCard key={index} title={item.title} value={item.value} index={index} />
                         ))}
                     </div>
                 </div>
