@@ -8,7 +8,7 @@ export default function Blog(props: Props) {
     return (
         <div>
             <div className="animate-primary text-main-dark w-full flex min-h-screen items-center justify-center">
-                <div className="flex gap-[220px] overflow-auto" style={{
+                <div className="flex gap-55 overflow-auto" style={{
                     display: 'block',
                     maxHeight: '500px',
                     margin: 0,
