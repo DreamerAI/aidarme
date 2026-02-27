@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export const WelcomePage = () => {
 	const ref = useRef(null);
@@ -12,6 +12,12 @@ export const WelcomePage = () => {
 	const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 	const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 	const y = useTransform(scrollYProgress, [0, 1], [0, -80]);
+	const paragraphY = useTransform(scrollYProgress, [0, 1], ["0em", "-50px"]);
+	const subParagraphY = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["0em", "-150px"],
+	);
 
 	return (
 		<motion.div
@@ -24,10 +30,15 @@ export const WelcomePage = () => {
 			}}
 		>
 			<div className="text-center">
-				<h1 className="text-headline font-bold">AIDAR.</h1>
+				<motion.h1
+					style={{ y: paragraphY }}
+					className="text-headline font-bold"
+				>
+					AIDAR.
+				</motion.h1>
 				<div className="flex justify-around mt-6 gap-2 w-full text-xl md:flex-row flex-col sm:text-4xl">
-					<p>Frontend Developer</p>
-					<p>UI/UX Designer</p>
+					<motion.p style={{ y: subParagraphY }}>Frontend Developer</motion.p>
+					<motion.p style={{ y: subParagraphY }}>UI/UX Designer</motion.p>
 				</div>
 			</div>
 		</motion.div>
