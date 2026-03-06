@@ -1,10 +1,11 @@
 import { Sidebar } from "@/components";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Koulen, Inter } from "next/font/google";
 import { SmoothScrollLayout } from "@/layout/SmoothScrollLayout";
 
 const inter = Inter({ subsets: ["latin"] });
+const koulen = Koulen({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "DreamerAI",
@@ -19,13 +20,13 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" className="scroll-smooth">
-			<body className={inter.className}>
+			<body className={`${inter.className} ${koulen.className}`}>
 				<SmoothScrollLayout>
-					<div className="flex relative">
-						<div className="fixed flex items-end w-20 justify-center right-0 md:left-0 group z-50 h-full pr-0 md:items-center md:pl-6 md:pr-0 pb-4 md:pb-0">
+					<div className="flex relative bg-black">
+						{/* <div className="fixed flex items-end w-20 justify-center right-0 md:left-0 group z-50 h-full pr-0 md:items-center md:pl-6 md:pr-0 pb-4 md:pb-0">
 							<Sidebar />
-						</div>
-						<div>{children}</div>
+						</div> */}
+						{children}
 					</div>
 				</SmoothScrollLayout>
 			</body>
