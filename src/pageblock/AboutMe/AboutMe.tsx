@@ -1,96 +1,93 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import React from "react";
-import { AboutMeCard } from "@/components";
-import { PagesLayout } from "@/layout/PagesLayout";
-
-const aboutMeData = [
-	{
-		title: "Years of Experience",
-		value: 3,
-	},
-	{
-		title: "Projects Completed",
-		value: 10,
-	},
-	{
-		title: "Happy Clients",
-		value: 5,
-	},
-	{
-		title: "Cups of Coffee",
-		value: 100,
-	},
-];
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
+import React, { useRef } from 'react';
 
 export const AboutMe = () => {
-	return (
-		<PagesLayout>
-			<div className="flex w-full gap-10 md:gap-4 flex-col-reverse md:flex-row justify-between h-full">
-				<motion.div
-					className="w-full md:w-1/2 max-w-4xl flex flex-col gap-6 lg:gap-10 text-aboutme tracking-tight"
-					initial={{ opacity: 0, x: -100 }}
-					whileInView={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.8, ease: "easeOut" }}
-					viewport={{ once: false, amount: 0.3 }}
-				>
-					<h3 className="md:text-5xl text-4xl font-semibold uppercase md:text-left">
-						{" "}
-						Aidar Abdykayimov
-					</h3>
-					<div className="flex flex-col gap-10 leading-paragraph font-normal">
-						<p>
-							I am a passionate and experienced frontend developer and UI
-							designer with a passion for creating user-friendly and visually
-							appealing web interfaces. I have a strong understanding of HTML,
-							CSS, and JavaScript, and I am proficient in React. I am also
-							skilled in UI design principles and can create high-fidelity
-							mockups that translate seamlessly into functional web interfaces.
-						</p>
-					</div>
+  const containerRef = useRef(null);
 
-					<motion.div
-						className="grid grid-cols-2 grid-rows-2 gap-4"
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-						viewport={{ once: false, amount: 0.3 }}
-					>
-						{aboutMeData.map((item, index) => (
-							<motion.div
-								key={index}
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ delay: index * 0.15, duration: 0.5 }}
-								viewport={{ once: false, amount: 0.8 }}
-							>
-								<AboutMeCard
-									title={item.title}
-									value={item.value}
-									index={index}
-								/>
-							</motion.div>
-						))}
-					</motion.div>
-				</motion.div>
-				<motion.div
-					className="md:px-0"
-					initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
-					whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-					transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-					viewport={{ once: false, amount: 0.3 }}
-				>
-					<Image
-						src="/images/aidar.png"
-						alt="Picture of the author"
-						className="rounded-lg w-full"
-						width={350}
-						height={350}
-					/>
-				</motion.div>
-			</div>
-		</PagesLayout>
-	);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const titleY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const bioY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [250, -250]);
+  const imageRotate = useTransform(scrollYProgress, [0, 1], [-8, 8]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const fadeOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  return (
+    <div
+      className="relative min-h-screen w-full flex flex-col justify-center gap-10 lg:gap-14 text-main-dark bg-main-white px-10 md:px-20 py-32 overflow-hidden"
+      ref={containerRef}>
+      
+      {/* Noise layer */}
+      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-5 z-10 pointer-events-none" />
+
+      {/* Decorative Parallax Blobs */}
+      <motion.div 
+        style={{ y: useTransform(scrollYProgress, [0, 1], [-200, 300]) }}
+        className="absolute top-0 right-10 w-[30vw] h-[30vw] min-w-[300px] min-h-[300px] bg-gray-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-60 pointer-events-none z-0" 
+      />
+      <motion.div 
+        style={{ y: useTransform(scrollYProgress, [0, 1], [300, -200]) }}
+        className="absolute bottom-0 left-10 w-[40vw] h-[40vw] min-w-[400px] min-h-[400px] bg-gray-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0" 
+      />
+
+      <motion.h2
+        style={{ y: titleY, opacity: fadeOpacity }}
+        className="relative z-10">
+        ABOUT ME //
+      </motion.h2>
+
+      <div className="w-full relative z-10 flex flex-col lg:flex-row gap-12 lg:gap-20 justify-between items-center pt-10">
+        <motion.div 
+          style={{ y: bioY, opacity: fadeOpacity }}
+          className="flex flex-col gap-6 text-aboutme tracking-tight max-w-2xl w-full">
+          <h3 className="text-4xl md:text-5xl font-semibold uppercase text-left">
+            Aidar Abdykayimov
+          </h3>
+          <div className="flex flex-col gap-6 leading-paragraph text-lg md:text-xl font-inter font-light">
+            <p>
+              I am currently in my final year of studies at NUST MISIS University, where I am
+              pursuing a degree in{' '}
+              <span className="font-bold bg-main-dark text-main-white px-2 py-1 inline-block transform -rotate-1 hover:rotate-0 transition-transform">
+                Mining and Geological Information Systems
+              </span>
+              . 
+            </p>
+            <p>
+              With a strong passion for frontend development and UI/UX design, I have dedicated
+              myself to honing my skills in these areas. Over the years, I have gained valuable
+              experience through various projects and internships, allowing me to develop a deep
+              understanding of user-centered design principles and frontend technologies.
+            </p>
+            <p>
+              I am eager to apply my knowledge and creativity to create engaging and intuitive digital
+              experiences.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          style={{ y: imageY, rotate: imageRotate, scale: imageScale, opacity: fadeOpacity }}
+          className="shrink-0 w-full max-w-[300px] md:max-w-[400px] relative">
+          <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+            <Image 
+              src="/images/aidar.png" 
+              alt="Profile Picture" 
+              fill
+              className="object-cover" 
+              sizes="(max-width: 768px) 300px, 400px"
+              priority
+            />
+          </div>
+          <div className="absolute -inset-4 border-2 border-main-dark/10 rounded-2xl -z-10 transform translate-x-4 translate-y-4" />
+        </motion.div>
+      </div>
+    </div>
+  );
 };

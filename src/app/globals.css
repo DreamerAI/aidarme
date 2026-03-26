@@ -7,6 +7,11 @@ body {
 }
 
 @theme {
+
+  /* Fonts */
+  --font-koulen: var(--font-koulen);
+  --font-inter: var(--font-inter);
+
   /* Colors */
   --color-black: #1c1b1b;
 
@@ -35,45 +40,6 @@ body {
   --radius-sm: calc(var(--radius) - 4px);
 
   /* Animations */
-  --animate-slideIn: slideIn 0.5s ease-in-out forwards;
-  --animate-slideOut: slideOut 0.5s ease-in-out forwards 1.5s;
-  --animate-logoSlide: logoSlide 0.5s ease-in forwards 0.5s;
-  --animate-mobileNav: slideIn4 4s ease-in-out forwards;
-
-  @keyframes slideIn {
-    0% {
-      transform: translateX(-100px);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-  @keyframes slideOut {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100px);
-    }
-  }
-  @keyframes logoSlide {
-    0% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-  }
-  @keyframes mobileNav {
-    0% {
-      transform: translateY(-100%);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
 }
 
 @layer utilities {
@@ -99,6 +65,16 @@ body {
     &:hover {
       transform: translateX(1px) translateY(-1px);
       box-shadow: -4px 4px 0px 0px var(--color-main-dark);
+    }
+  }
+
+  .welcome-name {
+    transform: translateY(var(--name-y, 0%)) scale(var(--name-scale, 1));
+  }
+
+  @media (min-width: 768px) {
+    .welcome-name {
+      transform: translateX(var(--name-x, 0%)) scale(var(--name-scale, 1));
     }
   }
 }
