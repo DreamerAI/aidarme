@@ -1,8 +1,12 @@
 @import 'tailwindcss';
 @plugin "tailwindcss-animate";
 
-body {
+html {
   background-color: var(--color-main-dark);
+}
+
+body {
+  background-color: transparent;
   color: var(--color-main-white);
 }
 
@@ -76,5 +80,145 @@ body {
     .welcome-name {
       transform: translateX(var(--name-x, 0%)) scale(var(--name-scale, 1));
     }
+  }
+
+  .page-enter-delay {
+    animation: content-shell-in 0.35s ease both;
+    animation-delay: 0.22s;
+  }
+
+  .page-enter-delay > * {
+    opacity: 0;
+    animation: content-item-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: 0.32s;
+  }
+
+  .page-enter-delay > *:nth-child(2) {
+    animation-delay: 0.42s;
+  }
+
+  .page-enter-delay > *:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+
+  .page-enter-delay > *:nth-child(n + 4) {
+    animation-delay: 0.56s;
+  }
+}
+
+
+/* Disable default crossfade so the Framer Motion Chess transition handles the reveal */
+/* OLD PAGE (leaving) */
+::view-transition-old(root) {
+  animation: page-old-blur-out 0.75s ease both;
+  will-change: opacity, filter;
+}
+
+/* NEW PAGE (entering) */
+::view-transition-new(root) {
+  animation: page-new-blur-in 0.85s ease both;
+  will-change: opacity, filter;
+}
+
+::view-transition {
+  background: transparent;
+}
+
+::view-transition-group(root),
+::view-transition-image-pair(root),
+::view-transition-old(root),
+::view-transition-new(root) {
+  background: transparent;
+}
+
+/* Animations */
+@keyframes page-old-blur-out {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  55% {
+    opacity: 0;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+@keyframes noise {
+  0%   { transform: translate(0, 0) }
+  10%  { transform: translate(-5%, -10%) }
+  20%  { transform: translate(-15%, 5%) }
+  30%  { transform: translate(7%, -25%) }
+  40%  { transform: translate(-5%, 25%) }
+  50%  { transform: translate(-15%, 10%) }
+  60%  { transform: translate(15%, 0%) }
+  70%  { transform: translate(0%, 15%) }
+  80%  { transform: translate(3%, 35%) }
+  90%  { transform: translate(-10%, 10%) }
+  100% { transform: translate(0, 0) }
+}
+
+@keyframes page-new-blur-in {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  40% {
+    opacity: 0.2;
+    filter: blur(8px);
+  }
+  72% {
+    opacity: 0.75;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes content-shell-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes content-item-in {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+  }
+  70% {
+    opacity: 0.92;
+    filter: blur(1px);
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    filter: none;
+  }
+
+  .page-enter-delay,
+  .page-enter-delay > * {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 }

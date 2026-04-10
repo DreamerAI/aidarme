@@ -23,28 +23,22 @@ export const AboutMe = () => {
     <div
       className="relative min-h-screen w-full flex flex-col justify-center gap-10 lg:gap-14 text-main-dark bg-main-white px-10 md:px-20 py-32 overflow-hidden"
       ref={containerRef}>
-      
-      {/* Noise layer */}
-      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-5 z-10 pointer-events-none" />
-
       {/* Decorative Parallax Blobs */}
-      <motion.div 
+      {/* <motion.div
         style={{ y: useTransform(scrollYProgress, [0, 1], [-200, 300]) }}
-        className="absolute top-0 right-10 w-[30vw] h-[30vw] min-w-[300px] min-h-[300px] bg-gray-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-60 pointer-events-none z-0" 
+        className="absolute top-0 right-10 w-[30vw] h-[30vw] min-w-75 min-h-75 bg-gray-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-60 pointer-events-none z-0"
       />
-      <motion.div 
+      <motion.div
         style={{ y: useTransform(scrollYProgress, [0, 1], [300, -200]) }}
-        className="absolute bottom-0 left-10 w-[40vw] h-[40vw] min-w-[400px] min-h-[400px] bg-gray-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0" 
-      />
+        className="absolute bottom-0 left-10 w-[40vw] h-[40vw] min-w-100 min-h-100 bg-gray-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0"
+      /> */}
 
-      <motion.h2
-        style={{ y: titleY, opacity: fadeOpacity }}
-        className="relative z-10">
+      <motion.h2 style={{ y: titleY, opacity: fadeOpacity }} className="relative z-10">
         ABOUT ME //
       </motion.h2>
 
       <div className="w-full relative z-10 flex flex-col lg:flex-row gap-12 lg:gap-20 justify-between items-center pt-10">
-        <motion.div 
+        <motion.div
           style={{ y: bioY, opacity: fadeOpacity }}
           className="flex flex-col gap-6 text-aboutme tracking-tight max-w-2xl w-full">
           <h3 className="text-4xl md:text-5xl font-semibold uppercase text-left">
@@ -57,7 +51,7 @@ export const AboutMe = () => {
               <span className="font-bold bg-main-dark text-main-white px-2 py-1 inline-block transform -rotate-1 hover:rotate-0 transition-transform">
                 Mining and Geological Information Systems
               </span>
-              . 
+              .
             </p>
             <p>
               With a strong passion for frontend development and UI/UX design, I have dedicated
@@ -66,23 +60,24 @@ export const AboutMe = () => {
               understanding of user-centered design principles and frontend technologies.
             </p>
             <p>
-              I am eager to apply my knowledge and creativity to create engaging and intuitive digital
-              experiences.
+              I am eager to apply my knowledge and creativity to create engaging and intuitive
+              digital experiences.
             </p>
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           style={{ y: imageY, rotate: imageRotate, scale: imageScale, opacity: fadeOpacity }}
-          className="shrink-0 w-full max-w-[300px] md:max-w-[400px] relative">
+          className="shrink-0 w-full max-w-75 md:max-w-100 relative">
           <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
-            <Image 
-              src="/images/aidar.png" 
-              alt="Profile Picture" 
+            <Image
+              src="/images/aidar.png"
+              alt="Profile Picture"
               fill
-              className="object-cover" 
+              className="object-cover"
               sizes="(max-width: 768px) 300px, 400px"
               priority
+              unoptimized
             />
           </div>
           <div className="absolute -inset-4 border-2 border-main-dark/10 rounded-2xl -z-10 transform translate-x-4 translate-y-4" />

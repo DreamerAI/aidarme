@@ -1,9 +1,11 @@
+import { NextConfig } from "next";
+
 /** @type {import('next/dist/next-server/server/config').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: [{ loader: '@svgr/webpack', options: { icon: true } }],
+      use: [{ loader: "@svgr/webpack", options: { icon: true } }],
     });
 
     if (!isServer) {
@@ -12,6 +14,10 @@ const nextConfig = {
 
     return config;
   },
+  experimental: {
+    viewTransition: true,
+  },
+  output: "export",
 };
 
 module.exports = nextConfig;
