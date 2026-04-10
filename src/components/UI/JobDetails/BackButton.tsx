@@ -2,7 +2,7 @@
 
 import { useTransitionRouter } from "next-view-transitions";
 import { ArrowLeft } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export const BackButton = () => {
   const router = useTransitionRouter();

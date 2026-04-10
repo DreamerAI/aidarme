@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, MotionValue, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue, useMotionValueEvent } from "motion/react";
 import { CSSProperties, useRef, useState, useEffect } from "react";
 import { GrainOverlay } from "@/components";
 
