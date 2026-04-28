@@ -21,17 +21,8 @@ export const AboutMe = () => {
 
   return (
     <div
-      className="relative min-h-screen w-full flex flex-col justify-center gap-10 lg:gap-14 text-main-dark bg-main-white px-10 md:px-20 py-32 overflow-hidden"
+      className="relative min-h-screen w-full flex flex-col justify-center gap-10 lg:gap-14 text-main-dark bg-main-white px-10 md:px-20 overflow-hidden"
       ref={containerRef}>
-      {/* Decorative Parallax Blobs */}
-      {/* <motion.div
-        style={{ y: useTransform(scrollYProgress, [0, 1], [-200, 300]) }}
-        className="absolute top-0 right-10 w-[30vw] h-[30vw] min-w-75 min-h-75 bg-gray-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-60 pointer-events-none z-0"
-      />
-      <motion.div
-        style={{ y: useTransform(scrollYProgress, [0, 1], [300, -200]) }}
-        className="absolute bottom-0 left-10 w-[40vw] h-[40vw] min-w-100 min-h-100 bg-gray-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0"
-      /> */}
 
       <motion.h2 style={{ y: titleY, opacity: fadeOpacity }} className="relative z-10">
         ABOUT ME //

@@ -2,12 +2,11 @@
 @plugin "tailwindcss-animate";
 
 html {
-  background-color: var(--color-main-dark);
+  background-color: var(--color-ink-900);
 }
 
 body {
-  background-color: transparent;
-  color: var(--color-main-white);
+  color: var(--color-paper-100);
 }
 
 @theme {
@@ -16,14 +15,53 @@ body {
   --font-koulen: var(--font-koulen);
   --font-inter: var(--font-inter);
 
-  /* Colors */
-  --color-black: #1c1b1b;
+  /* =========================
+     INK BASE PALETTE
+  ========================= */
 
-  --color-main-white: #ffffff;
-  --color-main-dark: #23272a;
-  --color-main-light: #2c2f33;
-  --color-text-gray: #929292;
-  --color-text-link: #0070f3;
+  /* Ink (primary blacks) */
+  --color-ink-900: #0f0f10;   /* deep ink */
+  --color-ink-800: #1a1a1c;   /* main bg */
+  --color-ink-700: #242427;   /* elevated */
+  --color-ink-600: #2f2f33;
+
+  /* Paper (whites) */
+  --color-paper-100: #f5f3ef; /* warm paper */
+  --color-paper-200: #e8e6e3;
+  --color-paper-300: #d6d3d1;
+
+  /* Ink wash (grays) */
+  --color-wash-100: #a1a1a1;
+  --color-wash-200: #7a7a7a;
+  --color-wash-300: #525252;
+
+  /* =========================
+     ACCENTS (use VERY rarely)
+  ========================= */
+
+  /* Ink red (stamp style) */
+  --color-accent-red: #7a1c1c;
+
+  /* Indigo ink */
+  --color-accent-indigo: #1f2a44;
+
+  /* Muted gold (paper ink) */
+  --color-accent-gold: #a68a64;
+
+  /* Cold contrast */
+  --color-accent-ice: #dbe4ee;
+
+  /* =========================
+     SEMANTIC TOKENS
+  ========================= */
+
+  --color-main-dark: var(--color-ink-800);
+  --color-main-light: var(--color-ink-700);
+
+  --color-main-white: var(--color-paper-100);
+  --color-text-gray: var(--color-wash-100);
+
+  --color-text-link: var(--color-accent-indigo);
 
   /* Font Sizes */
   --text-headline: clamp(5rem, 20vw, 35rem);
@@ -42,8 +80,6 @@ body {
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
-  /* Animations */
 }
 
 @layer utilities {
@@ -63,14 +99,15 @@ body {
 
 @layer components {
   .card-hover {
-    border: 1px solid var(--color-main-dark);
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    &:hover {
-      transform: translateX(1px) translateY(-1px);
-      box-shadow: -4px 4px 0px 0px var(--color-main-dark);
-    }
+  border: 1px solid var(--color-ink-700);
+  background: var(--color-ink-800);
+
+  &:hover {
+    transform: translateX(2px) translateY(-2px);
+    box-shadow: -6px 6px 0px 0px var(--color-ink-900);
+  
   }
+}
 
   .welcome-name {
     transform: translateY(var(--name-y, 0%)) scale(var(--name-scale, 1));

@@ -1,16 +1,7 @@
 "use client";
 
-import {
-	motion,
-	useScroll,
-	useTransform,
-	MotionValue,
-	useMotionValueEvent,
-} from "motion/react";
+import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { CSSProperties, useRef } from "react";
-import { GrainOverlay } from "@/components";
-
-const WELCOME_VIDEO_SRC = "/frames/my_video.mp4";
 
 const HighlightedTitle = ({
 	text,
@@ -19,119 +10,109 @@ const HighlightedTitle = ({
 }: {
 	text: string;
 	progress: MotionValue<number>;
-	range: [number, number, number];
+	range: [number, number];
 }) => {
-	const opacity = useTransform(progress, range, [0.2, 1, 0.2]);
-	const scale = useTransform(progress, range, [1, 1.1, 1]);
+	const localProgress = useTransform(progress, range, [0, 1], { clamp: true });
+	const opacity = useTransform(localProgress, [0, 0.5, 1], [0.3, 1, 0.2]);
+	const scale = useTransform(localProgress, [0, 0.5, 1], [1.02, 1.1, 1]);
 
 	return (
-		<motion.p
-			style={{ opacity, scale }}
-			className="py-2 transition-colors duration-300"
-		>
+		<motion.p style={{ opacity, scale }} className="py-2">
 			{text}
 		</motion.p>
 	);
 };
 
+/** Shared content rendered in both colour layers */
+const SceneContent = ({
+	nameScale,
+	nameXDesktop,
+	nameYMobile,
+	titlesProgress,
+	titlesOpacity,
+}: {
+	nameScale: MotionValue<number>;
+	nameXDesktop: MotionValue<string>;
+	nameYMobile: MotionValue<string>;
+	titlesProgress: MotionValue<number>;
+	titlesOpacity: MotionValue<number>;
+}) => (
+	<div className="sticky top-0 h-screen flex flex-col md:flex-row items-center justify-center overflow-hidden">
+		<motion.h1
+			style={
+				{
+					"--name-scale": nameScale,
+					"--name-x": nameXDesktop,
+					"--name-y": nameYMobile,
+				} as CSSProperties
+			}
+			className="welcome-name leading-none text-center font-bold text-[6rem] md:text-[10rem] lg:text-[20rem]"
+		>
+			AIDAR.
+		</motion.h1>
+
+		<motion.div
+			style={{ opacity: titlesOpacity, pointerEvents: titlesOpacity }}
+			className="font-medium text-2xl md:text-4xl absolute bottom-[20%] md:bottom-auto md:right-24 text-center md:text-left space-y-2"
+		>
+			<HighlightedTitle text="Frontend Developer" progress={titlesProgress} range={[0.0, 0.33]} />
+			<HighlightedTitle text="UI Designer"        progress={titlesProgress} range={[0.33, 0.66]} />
+			<HighlightedTitle text="React Specialist"   progress={titlesProgress} range={[0.66, 1]} />
+		</motion.div>
+	</div>
+);
+
 export const WelcomePageV2 = () => {
 	const containerRef = useRef(null);
-	const videoRef = useRef<HTMLVideoElement>(null);
 
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
 		offset: ["start start", "end end"],
 	});
 
-	const nameScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.9]);
-	const nameXDesktop = useTransform(scrollYProgress, [0, 0.3], ["0%", "-25%"]);
-	const nameYMobile = useTransform(scrollYProgress, [0, 0.3], ["0%", "-35%"]);
+	const nameScale     = useTransform(scrollYProgress, [0, 0.3], [1, 0.9]);
+	const nameXDesktop  = useTransform(scrollYProgress, [0, 0.3], ["0%", "-25%"]);
+	const nameYMobile   = useTransform(scrollYProgress, [0, 0.3], ["0%", "-35%"]);
 
-	const titlesOpacity = useTransform(scrollYProgress, [0.3, 0.35], [0, 1]);
-	const titlesDisplay = useTransform(scrollYProgress, (latest) =>
-		latest >= 0.3 ? "block" : "none",
-	);
+	const titlesProgress = useTransform(scrollYProgress, [0.3, 0.9], [0, 1], { clamp: true });
+	const titlesOpacity  = useTransform(titlesProgress, [0, 0.05], [0, 1]);
 
-	useMotionValueEvent(scrollYProgress, "change", (latest) => {
-		const video = videoRef.current;
-		if (!video || !Number.isFinite(video.duration) || video.duration <= 0) {
-			return;
-		}
+	const wipeProgress = useTransform(scrollYProgress, [0.40, 1], [0, 1], { clamp: true });
 
-		video.currentTime = latest * video.duration;
-	});
+	// White overlay grows from bottom upward; also used to clip the dark-text layer
+	const wipeClipPath = useTransform(wipeProgress, (v) => `inset(${(1 - v) * 100}% 0% 0% 0%)`);
+
+	// Light-text layer stays visible above the wipe edge (still on dark bg)
+	const lightTextClipPath = useTransform(wipeProgress, (v) => `inset(0% 0% ${v * 100}% 0%)`);
+
+	const sceneProps = { nameScale, nameXDesktop, nameYMobile, titlesProgress, titlesOpacity };
 
 	return (
-		<div
-			ref={containerRef}
-			className="relative h-[250vh] bg-black w-full isolate"
-		>
-			{/* GRAIN EFFECT */}
-			{/* <GrainOverlay /> */}
+		<motion.div ref={containerRef} className="relative h-[250vh] w-full isolate">
+			{/* Base dark background */}
+			<div className="absolute inset-0 bg-ink-900 -z-20" />
 
-			{/* SCROLL DRIVEN VIDEO */}
-			<video
-				ref={videoRef}
-				src={WELCOME_VIDEO_SRC}
-				preload="auto"
-				muted
-				playsInline
-				onLoadedMetadata={() => {
-					if (!videoRef.current) return;
-					videoRef.current.pause();
-					videoRef.current.currentTime = 0;
-				}}
-				className="absolute inset-0 w-full h-full object-cover aspect-9/19 z-0 mix-blend-screen  pointer-events-none"
+			{/* White wipe overlay — grows from bottom upward */}
+			<motion.div
+				style={{ clipPath: wipeClipPath }}
+				className="absolute inset-0 z-0 bg-paper-100"
 			/>
 
-			<div className="sticky top-0 h-screen flex flex-col md:flex-row items-center justify-center overflow-hidden z-20">
-				{/* MAIN NAME */}
-				<motion.h1
-					style={
-						{
-							"--name-scale": nameScale,
-							"--name-x": nameXDesktop,
-							"--name-y": nameYMobile,
-						} as CSSProperties
-					}
-					className="welcome-name text-white leading-none text-center font-bold text-[6rem] md:text-[10rem] lg:text-[20rem]"
-				>
-					AIDAR.
-				</motion.h1>
+			{/* Light text — visible on the dark (un-wiped) top portion */}
+			<motion.div
+				style={{ clipPath: lightTextClipPath }}
+				className="absolute inset-0 z-10 text-paper-100 pointer-events-none"
+			>
+				<SceneContent {...sceneProps} />
+			</motion.div>
 
-				<motion.div
-					style={{
-						opacity: titlesOpacity,
-						display: titlesDisplay,
-					}}
-					className="text-white font-medium text-2xl md:text-4xl absolute bottom-[20%] md:bottom-auto md:right-24 text-center md:text-left space-y-2"
-				>
-					<HighlightedTitle
-						text="Frontend Developer"
-						progress={scrollYProgress}
-						range={[0.35, 0.45, 0.55]}
-					/>
-					<HighlightedTitle
-						text="UI Designer"
-						progress={scrollYProgress}
-						range={[0.55, 0.65, 0.75]}
-					/>
-					<HighlightedTitle
-						text="React Specialist"
-						progress={scrollYProgress}
-						range={[0.75, 0.85, 0.95]}
-					/>
-				</motion.div>
-			</div>
-
-			{/* EXPANDING WHITE CIRCLE AT VERY BOTTOM OF BLOCK */}
-			{/* <motion.div
-				style={{
-					scale: circleScale,
-					opacity: circleOpacity,
-				}}
-				className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-40 h-40 bg-white rounded-full z-50 pointer-events-none origin-center"
-			/> */}
-		</div>
+			{/* Dark text — visible on the white (wiped) bottom portion; same clip as wipe */}
+			<motion.div
+				style={{ clipPath: wipeClipPath }}
+				className="absolute inset-0 z-10 text-ink-900 pointer-events-none"
+			>
+				<SceneContent {...sceneProps} />
+			</motion.div>
+		</motion.div>
 	);
 };
