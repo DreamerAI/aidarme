@@ -51,6 +51,9 @@ body {
   /* Cold contrast */
   --color-accent-ice: #dbe4ee;
 
+  /* Warm orange (resume accent) */
+  --color-accent-orange: #c44d2b;
+
   /* =========================
      SEMANTIC TOKENS
   ========================= */
