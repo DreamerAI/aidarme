@@ -17,9 +17,40 @@ const pressStart2P = Press_Start_2P({
 });
 
 export const metadata: Metadata = {
-	title: "DreamerAI",
+	title: {
+		default: "Aidar Abdykaiymov | Frontend Engineer & UI Designer",
+		template: "%s | Aidar Abdykaiymov",
+	},
 	description:
-		"Portfolio of DreamerAI - Frontend Developer and UI/UX Designer based in Moscow.",
+		"Portfolio of Aidar Abdykaiymov (DreamerAI) - Frontend Engineer and UI/UX Designer based in Moscow. Exploring creative web development, high-performance web apps, and modern design.",
+	keywords: [
+		"Aidar Abdykaiymov",
+		"DreamerAI",
+		"Frontend Engineer",
+		"Frontend Developer",
+		"React Specialist",
+		"UI Designer",
+		"Web Developer",
+		"Moscow",
+		"Portfolio",
+	],
+	authors: [{ name: "Aidar Abdykaiymov" }],
+	creator: "Aidar Abdykaiymov",
+	openGraph: {
+		type: "website",
+		locale: "en_US",
+		url: "https://github.com/DreamerAI",
+		title: "Aidar Abdykaiymov | Frontend Engineer & UI Designer",
+		description:
+			"Portfolio of Aidar Abdykaiymov (DreamerAI) - Frontend Engineer and UI/UX Designer based in Moscow.",
+		siteName: "Aidar Abdykaiymov Portfolio",
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Aidar Abdykaiymov | Frontend Engineer",
+		description:
+			"Portfolio of Aidar Abdykaiymov (DreamerAI) - Frontend Engineer and UI/UX Designer based in Moscow.",
+	},
 };
 
 export default function RootLayout({
