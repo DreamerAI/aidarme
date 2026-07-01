@@ -1,4 +1,21 @@
-import { ReactLenis } from "lenis/react";
+"use client";
+
+import { ReactLenis, useLenis } from "lenis/react";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+
+function ScrollRestoration() {
+	const pathname = usePathname();
+	const lenis = useLenis();
+
+	useEffect(() => {
+		if (lenis) {
+			lenis.scrollTo(0, { immediate: true });
+		}
+	}, [pathname, lenis]);
+
+	return null;
+}
 
 export const SmoothScrollLayout = ({
 	children,
@@ -13,6 +30,7 @@ export const SmoothScrollLayout = ({
 				smoothWheel: true,
 			}}
 		>
+			<ScrollRestoration />
 			{children}
 		</ReactLenis>
 	);

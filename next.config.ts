@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
     viewTransition: true,
   },
   output: "export",
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig;

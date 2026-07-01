@@ -14,6 +14,7 @@ body {
   /* Fonts */
   --font-koulen: var(--font-koulen);
   --font-inter: var(--font-inter);
+  --font-press-start: var(--font-press-start);
 
   /* =========================
      INK BASE PALETTE
@@ -92,6 +93,14 @@ body {
     padding: 0;
     overflow-x: hidden;
   }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 }
 
 @layer base {
@@ -147,21 +156,31 @@ body {
 }
 
 
-/* Disable default crossfade so the Framer Motion Chess transition handles the reveal */
-/* OLD PAGE (leaving) */
-::view-transition-old(root) {
-  animation: page-old-blur-out 0.75s ease both;
-  will-change: opacity, filter;
-}
-
-/* NEW PAGE (entering) */
-::view-transition-new(root) {
-  animation: page-new-blur-in 0.85s ease both;
-  will-change: opacity, filter;
-}
-
 ::view-transition {
   background: transparent;
+}
+
+::view-transition-group(root),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  animation: fade-out 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+::view-transition-new(root) {
+  animation: fade-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 ::view-transition-group(root),
@@ -172,21 +191,6 @@ body {
 }
 
 /* Animations */
-@keyframes page-old-blur-out {
-  0% {
-    opacity: 1;
-    filter: blur(0px);
-  }
-  55% {
-    opacity: 0;
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 0;
-    filter: blur(10px);
-  }
-}
-
 @keyframes noise {
   0%   { transform: translate(0, 0) }
   10%  { transform: translate(-5%, -10%) }
