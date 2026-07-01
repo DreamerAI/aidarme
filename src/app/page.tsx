@@ -1,10 +1,4 @@
-import {
-	AboutMe,
-	Experience,
-	Projects,
-	WelcomePage,
-	Contacts,
-} from "@/pageblock";
+import { AboutMe, Experience, Projects, Contacts } from "@/pageblock";
 import { WelcomePageV2 } from "@/pageblock/WelcomePage/WelcomePageV2";
 import { FloatingNav } from "@/components/UI/Navigation/FloatingNav";
 import { ScrollSkew } from "@/components/UI/Effects/ScrollSkew";
