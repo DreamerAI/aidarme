@@ -110,7 +110,7 @@ export const Experience = () => {
 								/>
 								<text
 									fontSize="10.5"
-									className="font-koulen tracking-[0.2em] uppercase"
+									className="font-koulen tracking-[0.2em] uppercase fill-current text-ink-900 group-hover:text-main-white transition-colors duration-500"
 								>
 									<textPath href="#textPath" startOffset="0%">
 										DOWNLOAD RESUME • DOWNLOAD RESUME •
@@ -152,7 +152,7 @@ export const Experience = () => {
 								className="relative flex flex-col group"
 							>
 								{/* Dot */}
-								<div className="absolute -left-8 md:-left-12 top-2 w-[9px] h-[9px] rounded-full bg-ink-900 -translate-x-1/2 ring-4 ring-transparent group-hover:ring-accent-orange/20 group-hover:bg-accent-orange group-hover:scale-125 transition-all duration-300 ease-out" />
+								<div className="absolute -left-8 md:-left-12 top-2 w-2.25 h-2.25 rounded-full bg-ink-900 -translate-x-1/2 ring-4 ring-transparent group-hover:ring-accent-orange/20 group-hover:bg-accent-orange group-hover:scale-125 transition-all duration-300 ease-out" />
 
 								<div className="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-1 md:gap-4">
 									<div>

@@ -41,7 +41,7 @@ export const PokemonLoader = () => {
 					initial={{ opacity: 1, y: "0%" }}
 					exit={{ y: "-100%" }}
 					transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-					className="fixed inset-0 z-[100] bg-ink-900 flex flex-col items-center justify-center"
+					className="fixed inset-0 z-100 bg-ink-900 flex flex-col items-center justify-center"
                     style={{ fontFamily: 'var(--font-press-start), monospace' }}
 				>
                     {/* CSS Pokeball */}
@@ -51,7 +51,7 @@ export const PokemonLoader = () => {
                         {/* Bottom White Half */}
                         <div className="absolute bottom-0 w-full h-[50%] bg-[#f0f0f0] rounded-b-full border-[6px] border-t-0 border-black" />
                         {/* Center Belt */}
-                        <div className="absolute top-1/2 left-0 w-full h-[6px] bg-black -translate-y-1/2" />
+                        <div className="absolute top-1/2 left-0 w-full h-1.5 bg-black -translate-y-1/2" />
                         {/* Center Button */}
                         <div className="absolute top-1/2 left-1/2 w-8 h-8 bg-white border-[6px] border-black rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                             <div className="w-2 h-2 bg-black rounded-full animate-pulse" />
@@ -61,8 +61,8 @@ export const PokemonLoader = () => {
                     {/* Dialog Box */}
                     <div className="w-[90%] max-w-2xl border-[6px] border-black bg-white p-6 md:p-10 rounded-md relative shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
                         {/* Inner detail line */}
-                        <div className="absolute inset-1 border-[4px] border-black/10 rounded-sm pointer-events-none" />
-                        <p className="text-black text-sm md:text-xl leading-relaxed min-h-[3rem] tracking-wider">
+                        <div className="absolute inset-1 border-4 border-black/10 rounded-sm pointer-events-none" />
+                        <p className="text-black text-sm md:text-xl leading-relaxed min-h-12 tracking-wider">
                             {text}
                             <span className="animate-pulse">_</span>
                         </p>
