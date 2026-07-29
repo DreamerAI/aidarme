@@ -10,7 +10,7 @@ export default function Home() {
 			{/* TODO: Add Trigger once */}
 			<AboutMe />
 			<Experience />
-			<Projects />
+			{/* <Projects /> */}
 			<Contacts />
 		</div>
 	);

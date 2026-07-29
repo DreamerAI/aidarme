@@ -1,0 +1,148 @@
+{
+	"en": {
+		"nav": {
+			"home": "Home",
+			"about": "About",
+			"journey": "Journey",
+			"work": "Work",
+			"contact": "Contact"
+		},
+		"welcome": {
+			"title1": "Frontend Engineer",
+			"title2": "UI Designer",
+			"title3": "React Specialist"
+		},
+		"about": {
+			"sectionTitle": "About Me //",
+			"role": "Frontend Engineer",
+			"name": "Aidar Abdykaiymov",
+			"infoTitle": "Info",
+			"bio": "Frontend Engineer with 4+ years of commercial experience building scalable products, design systems and high-performance web applications. I focus on writing clean code, creating great user experiences and solving complex problems. My journey into frontend actually started because I wanted to build a browser-based Pokémon game! Fun fact: my absolute favorite is",
+			"pokemon": "Tepig",
+			"techLabel": {
+				"frontend": "Frontend",
+				"statemanage": "State Manage",
+				"styling": "Styling",
+				"backend": "Backend",
+				"tools": "Tools",
+				"testing": "Testing"
+			},
+			"langLevels": {
+				"native": "Native",
+				"c1": "C1"
+			},
+			"stats": {
+				"experience": "Years of\nExperience",
+				"projects": "Successful\nProjects",
+				"clients": "Clients &\nCompanies",
+				"learning": "Always Learning\nNew Things"
+			},
+			"location": "Based in Moscow"
+		},
+		"experience": {
+			"sidebarTitle": "MY JOURNEY SO FAR",
+			"sectionTitle": "// EXPERIENCE",
+			"mainTitle": "PROFESSIONAL EXPERIENCE",
+			"pdfLabel": "GET PDF VERSION",
+			"pdfSpin": "DOWNLOAD RESUME • DOWNLOAD RESUME • ",
+			"freelanceLabel": "AVAILABLE FOR FREELANCE",
+			"freelanceDesc": "Currently exploring new opportunities and open to collaborating on ambitious projects.",
+			"remote": "REMOTE"
+		},
+		"projects": {
+			"sectionTitle": "SELECTED WORKS //",
+			"mainTitle": "FEATURED PROJECTS",
+			"view": "VIEW",
+			"back": "Back",
+			"aboutProject": "About The Project",
+			"technologies": "Technologies",
+			"notFound": "Project not found"
+		},
+		"contacts": {
+			"headline": "LET'S BUILD SOMETHING EXTRAORDINARY.",
+			"subheadline": "Whether you need a cutting-edge web application, a seamless user experience, or just want to say hi. My inbox is always open.",
+			"localTime": "LOCAL TIME",
+			"loading": "LOADING...",
+			"getInTouch": ["GET", "IN", "TOUCH"],
+			"sayHi": "SAY HI",
+			"copyright": "DREAMER AI. ALL RIGHTS RESERVED."
+		},
+		"metadata": {
+			"title": "Aidar Abdykaiymov | Frontend Engineer & UI Designer",
+			"description": "Portfolio of Aidar Abdykaiymov (DreamerAI) - Frontend Engineer and UI/UX Designer based in Moscow. Exploring creative web development, high-performance web apps, and modern design."
+		}
+	},
+	"ru": {
+		"nav": {
+			"home": "Главная",
+			"about": "Обо мне",
+			"journey": "Путь",
+			"work": "Работы",
+			"contact": "Контакты"
+		},
+		"welcome": {
+			"title1": "Frontend Engineer",
+			"title2": "UI Designer",
+			"title3": "React Specialist"
+		},
+		"about": {
+			"sectionTitle": "Обо мне //",
+			"role": "Фронтенд-разработчик",
+			"name": "Айдар Абдыкайымов",
+			"infoTitle": "Инфо",
+			"bio": "Фронтенд-инженер с более чем 4 годами коммерческого опыта в создании масштабируемых продуктов, дизайн-систем и высокопроизводительных веб-приложений. Я фокусируюсь на написании чистого кода, создании отличного пользовательского опыта и решении сложных задач. Мой путь во фронтенд начался с желания создать браузерную игру про покемонов! Забавный факт: мой самый любимый покемон —",
+			"pokemon": "Тепиг",
+			"techLabel": {
+				"frontend": "Фронтенд",
+				"statemanage": "Стейт-менедж",
+				"styling": "Стилизация",
+				"backend": "Бэкенд",
+				"tools": "Инструменты",
+				"testing": "Тестирование"
+			},
+			"langLevels": {
+				"native": "Родной",
+				"c1": "C1"
+			},
+			"stats": {
+				"experience": "Лет\nопыта",
+				"projects": "Успешных\nпроектов",
+				"clients": "Клиентов &\nкомпаний",
+				"learning": "Всегда учусь\nновому"
+			},
+			"location": "В данный момент в Моксве"
+		},
+		"experience": {
+			"sidebarTitle": "МОЙ ПУТЬ НА СЕГОДНЯ",
+			"sectionTitle": "// ОПЫТ РАБОТЫ",
+			"mainTitle": "ПРОФЕССИОНАЛЬНЫЙ ОПЫТ",
+			"pdfLabel": "СКАЧАТЬ PDF",
+			"pdfSpin": "СКАЧАТЬ РЕЗЮМЕ • СКАЧАТЬ РЕЗЮМЕ • ",
+			"freelanceLabel": "ОТКРЫТ К СОТРУДНИЧЕСТВУ",
+			"freelanceDesc": "Сейчас я открыт для новых предложений и готов к сотрудничеству над амбициозными проектами.",
+			"remote": "УДАЛЕННО"
+		},
+		"projects": {
+			"sectionTitle": "ИЗБРАННЫЕ РАБОТЫ //",
+			"mainTitle": "ПРОЕКТЫ",
+			"view": "СМОТРЕТЬ",
+			"back": "Назад",
+			"aboutProject": "О проекте",
+			"technologies": "Технологии",
+			"notFound": "Проект не найден"
+		},
+		"contacts": {
+			"headline": "ДАВАЙТЕ СДЕЛАЕМ ЧТО-ТО КРУТОЕ ВМЕСТЕ.",
+			"subheadline": "Нужен веб-сайт, который реально работает? Или просто хочется поздороваться? Пишите — почта всегда открыта.",
+			"localTime": "МЕСТНОЕ ВРЕМЯ",
+			"loading": "ЗАГРУЗКА...",
+			"getInTouch": ["НАПИШИТЕ", "МНЕ"],
+			"sayHi": "ПРИВЕТ",
+			"copyright": "DREAMER AI. ВСЕ ПРАВА ЗАЩИЩЕНЫ."
+		},
+		"metadata": {
+			"title": "Айдар Абдыкайымов | Фронтенд-разработчик и UI-дизайнер",
+			"description": "Портфолио Айдара Абдыкайымова (DreamerAI) - Фронтенд-разработчика и UI/UX дизайнера из Москвы. Креативная веб-разработка, быстрые веб-приложения и современный дизайн."
+		}
+	}
+}

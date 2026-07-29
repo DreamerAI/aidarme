@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
+import { useLanguage } from "@/context/LanguageContext";
 
 const AnimatedNumber = ({
 	value,
@@ -52,7 +53,7 @@ const TepigTooltip = ({ children }: { children: React.ReactNode }) => {
 					alt="Tepig"
 					width={120}
 					height={120}
-					className="max-w-[100px] sm:max-w-[120px] drop-shadow-md origin-bottom animate-bounce"
+					className="max-w-25 sm:max-w-30 drop-shadow-md origin-bottom animate-bounce"
 					style={{ animationDuration: "2s" }}
 				/>
 			</span>
@@ -206,6 +207,7 @@ const StatBlock = ({
 
 /* ─── Main component ─── */
 export const AboutMe = () => {
+	const { t, language } = useLanguage();
 	const [headerRef, headerInView] = useInView({
 		triggerOnce: true,
 		threshold: 0.2,
@@ -253,7 +255,7 @@ export const AboutMe = () => {
 
 	const infinityIcon = (
 		<motion.svg
-			className="w-10 h-[22px] text-ink-900"
+			className="w-10 h-5.5 text-ink-900"
 			viewBox="0 0 40 22"
 			fill="none"
 			stroke="currentColor"
@@ -274,7 +276,7 @@ export const AboutMe = () => {
 		>
 			{/* ── Header ── */}
 			<h3 className="text-[0.75rem] font-medium tracking-[0.15em] uppercase text-wash-200 font-inter mb-5">
-				About Me //
+				{t("about.sectionTitle")}
 			</h3>
 			<motion.div
 				ref={headerRef}
@@ -286,15 +288,17 @@ export const AboutMe = () => {
 			>
 				<div className="flex flex-col gap-2">
 					<h2 className="font-koulen text-[clamp(2rem,5vw,3.5rem)] leading-none tracking-wide uppercase flex flex-wrap gap-x-3">
-						{"Aidar Abdykaiymov".split(" ").map((word, i) => (
-							<span key={i} className="flex overflow-hidden">
-								{word.split("").map((char, j) => (
-									<motion.span key={j} variants={itemFadeUp}>
-										{char}
-									</motion.span>
+						{language === "ru"
+							? "Айдар Абдыкайымов"
+							: "Aidar Abdykaiymov"?.split(" ").map((word, i) => (
+									<span key={i} className="flex overflow-hidden">
+										{word.split("").map((char, j) => (
+											<motion.span key={j} variants={itemFadeUp}>
+												{char}
+											</motion.span>
+										))}
+									</span>
 								))}
-							</span>
-						))}
 					</h2>
 				</div>
 
@@ -304,7 +308,7 @@ export const AboutMe = () => {
 				>
 					<span className="font-koulen text-[2.5rem] leading-none">[24]</span>
 					<span className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-accent-orange font-inter">
-						Frontend Engineer
+						{t("about.role")}
 					</span>
 				</motion.div>
 			</motion.div>
@@ -321,7 +325,7 @@ export const AboutMe = () => {
 					animate={bodyInView ? "visible" : "hidden"}
 					custom={0}
 					style={{ y }}
-					className="shrink-0 w-full max-w-[280px] mx-auto mb-16 lg:mb-0 lg:mx-0 lg:w-[260px] xl:w-[300px] lg:max-w-none"
+					className="shrink-0 w-full max-w-70 mx-auto mb-16 lg:mb-0 lg:mx-0 lg:w-65 xl:w-75 lg:max-w-none"
 				>
 					<motion.div
 						onMouseMove={handleMouseMove}
@@ -357,34 +361,29 @@ export const AboutMe = () => {
 						custom={0}
 						className="font-koulen text-[2rem] tracking-[0.04em] uppercase mb-5 lg:mb-7"
 					>
-						Info
+						{t("about.infoTitle")}
 					</motion.h3>
 
 					{/* 01 — Profile */}
 					<InfoSection
 						number="01"
-						title="Profile"
+						title={language === "ru" ? "Профиль" : "Profile"}
 						delay={0.05}
 						inView={bodyInView}
 					>
 						<motion.p
 							variants={itemFadeUp}
-							className="font-inter text-[0.85rem] leading-relaxed text-wash-300 max-w-[440px]"
+							className="font-inter text-[0.85rem] leading-relaxed text-wash-300 max-w-110"
 						>
-							Frontend Engineer with 4+ years of commercial experience building
-							scalable products, design systems and high-performance web
-							applications. I focus on writing clean code, creating great user
-							experiences and solving complex problems. My journey into frontend
-							actually started because I wanted to build a browser-based Pokémon
-							game! Fun fact: my absolute favorite is{" "}
-							<TepigTooltip>Tepig</TepigTooltip>.
+							{t("about.bio")} <TepigTooltip>{t("about.pokemon")}</TepigTooltip>
+							.
 						</motion.p>
 					</InfoSection>
 
 					{/* 02 — Tech Stack */}
 					<InfoSection
 						number="02"
-						title="Tech Stack"
+						title={language === "ru" ? "Стек технологий" : "Tech Stack"}
 						delay={0.15}
 						inView={bodyInView}
 					>
@@ -393,10 +392,12 @@ export const AboutMe = () => {
 								<motion.div
 									variants={itemFadeUp}
 									key={row.label}
-									className="flex items-baseline gap-4 py-[3px]"
+									className="flex items-baseline gap-4 py-0.75"
 								>
-									<span className="font-inter text-[0.7rem] sm:text-[0.7rem] font-bold tracking-widest uppercase text-ink-900 min-w-[100px] sm:min-w-[130px] shrink-0">
-										{row.label}
+									<span className="font-inter text-[0.7rem] sm:text-[0.7rem] font-bold tracking-widest uppercase text-ink-900 min-w-25 sm:min-w-32.5 shrink-0">
+										{t(
+											`about.techLabel.${row.label.toLowerCase().replace(" ", "")}`,
+										)}
 									</span>
 									<span className="font-inter text-[0.8rem] text-wash-300 flex flex-wrap gap-x-1">
 										{row.items.map((item, i) => (
@@ -418,7 +419,7 @@ export const AboutMe = () => {
 					{/* 03 — Languages */}
 					<InfoSection
 						number="03"
-						title="Languages"
+						title={language === "ru" ? "Языки" : "Languages"}
 						delay={0.25}
 						inView={bodyInView}
 					>
@@ -437,7 +438,7 @@ export const AboutMe = () => {
 										{lang.code}
 									</span>
 									<span className="text-[0.8rem] text-wash-200">
-										{lang.level}
+										{t(`about.langLevels.${lang.level.toLowerCase()}`)}
 									</span>
 								</motion.div>
 							))}
@@ -448,36 +449,50 @@ export const AboutMe = () => {
 				{/* Stats — Desktop sidebar */}
 				<div
 					ref={statsRef}
-					className="hidden lg:flex flex-col items-start gap-6 pl-8 xl:pl-10 border-l border-paper-300 min-w-[160px]"
+					className="hidden lg:flex flex-col items-start gap-6 pl-8 xl:pl-10 border-l border-paper-300 min-w-40"
 				>
-					{STATS.map((stat, i) => (
-						<StatBlock
-							key={stat.value}
-							value={stat.value}
-							label={stat.label}
-							delay={0.12 * (i + 1)}
-							inView={statsInView}
-						/>
-					))}
+					{STATS.map((stat, i) => {
+						const labelKey = stat.value.includes("4")
+							? "about.stats.experience"
+							: stat.value.includes("15")
+								? "about.stats.projects"
+								: "about.stats.clients";
+						return (
+							<StatBlock
+								key={stat.value}
+								value={stat.value}
+								label={t(labelKey)}
+								delay={0.12 * (i + 1)}
+								inView={statsInView}
+							/>
+						);
+					})}
 				</div>
 			</div>
 
 			{/* Stats — Mobile (below body) */}
 			<div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-10 lg:hidden">
-				{STATS.map((stat) => (
-					<div key={stat.value} className="flex flex-col gap-1">
-						<span className="font-koulen text-[2.5rem] leading-none text-ink-900">
-							<AnimatedNumber value={stat.value} inView={bodyInView} />
-						</span>
-						<span className="font-inter text-[0.65rem] font-semibold tracking-widest uppercase text-wash-200 leading-snug whitespace-pre-line">
-							{stat.label}
-						</span>
-					</div>
-				))}
+				{STATS.map((stat) => {
+					const labelKey = stat.value.includes("4")
+						? "about.stats.experience"
+						: stat.value.includes("15")
+							? "about.stats.projects"
+							: "about.stats.clients";
+					return (
+						<div key={stat.value} className="flex flex-col gap-1">
+							<span className="font-koulen text-[2.5rem] leading-none text-ink-900">
+								<AnimatedNumber value={stat.value} inView={bodyInView} />
+							</span>
+							<span className="font-inter text-[0.65rem] font-semibold tracking-widest uppercase text-wash-200 leading-snug whitespace-pre-line">
+								{t(labelKey)}
+							</span>
+						</div>
+					);
+				})}
 				<div className="flex flex-col gap-1">
 					{infinityIcon}
 					<span className="font-inter text-[0.65rem] font-semibold tracking-widest uppercase text-wash-200 leading-snug whitespace-pre-line">
-						{"Always Learning\nNew Things"}
+						{t("about.stats.learning")}
 					</span>
 				</div>
 			</div>
@@ -492,7 +507,7 @@ export const AboutMe = () => {
 				className="flex justify-end items-center gap-2 mt-8 lg:mt-10 pt-4"
 			>
 				<span className="font-inter text-[0.65rem] font-semibold tracking-[0.15em] uppercase text-wash-200">
-					Based in Moscow
+					{t("about.location")}
 				</span>
 				<span className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
 			</motion.div>

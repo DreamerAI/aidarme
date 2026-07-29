@@ -3,13 +3,14 @@
 import { motion } from "motion/react";
 import React, { useRef, useState } from "react";
 import { useLenis } from "lenis/react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const navItems = [
-	{ label: "Home", target: "#home" },
-	{ label: "About", target: "#about" },
-	{ label: "Journey", target: "#experience" },
-	{ label: "Work", target: "#projects" },
-	{ label: "Contact", target: "#contact" },
+	{ key: "home", target: "#home" },
+	{ key: "about", target: "#about" },
+	{ key: "journey", target: "#experience" },
+	{ key: "work", target: "#projects" },
+	{ key: "contact", target: "#contact" },
 ];
 
 const MagneticLink = ({
@@ -56,6 +57,7 @@ const MagneticLink = ({
 
 export const FloatingNav = () => {
 	const lenis = useLenis();
+	const { t } = useLanguage();
 
 	const handleScroll = (target: string) => {
 		if (lenis) {
@@ -78,8 +80,8 @@ export const FloatingNav = () => {
 		>
 			{navItems.map((item) => (
 				<MagneticLink
-					key={item.label}
-					label={item.label}
+					key={item.key}
+					label={t(`nav.${item.key}`)}
 					target={item.target}
 					onClick={handleScroll}
 				/>

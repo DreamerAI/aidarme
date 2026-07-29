@@ -4,6 +4,8 @@ import { Koulen, Inter, Press_Start_2P } from "next/font/google";
 import { SmoothScrollLayout } from "@/layout/SmoothScrollLayout";
 import { ViewTransitions } from "next-view-transitions";
 import { YandexMetrica } from "@/components/Analytics/YandexMetrica";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { LanguageSelector } from "@/components/UI/Navigation/LanguageSelector";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const koulen = Koulen({
@@ -65,10 +67,13 @@ export default function RootLayout({
 				<body
 					className={`${koulen.variable} ${inter.variable} ${pressStart2P.variable} font-koulen`}
 				>
-					<YandexMetrica />
-					<SmoothScrollLayout>
-						<div className="flex flex-col relative bg-black">{children}</div>
-					</SmoothScrollLayout>
+					<LanguageProvider>
+						<LanguageSelector />
+						<YandexMetrica />
+						<SmoothScrollLayout>
+							<div className="flex flex-col relative bg-black">{children}</div>
+						</SmoothScrollLayout>
+					</LanguageProvider>
 				</body>
 			</html>
 		</ViewTransitions>

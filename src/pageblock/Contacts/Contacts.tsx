@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { SOCIAL_LINKS } from "@/data/socials";
+import { useLanguage } from "@/context/LanguageContext";
 import { TitleReveal } from "./components/TitleReveal";
 import { PokeballButton } from "./components/PokeballButton";
 
 export const Contacts = () => {
+	const { t } = useLanguage();
 	const [time, setTime] = useState("");
 
 	useEffect(() => {
@@ -29,18 +31,17 @@ export const Contacts = () => {
 			<div className="flex flex-col md:flex-row justify-between items-start gap-10">
 				<div className="max-w-md">
 					<h3 className="font-koulen text-3xl md:text-5xl mb-4 tracking-wide">
-						LET'S BUILD SOMETHING EXTRAORDINARY.
+						{t("contacts.headline")}
 					</h3>
 					<p className="font-inter text-ink-700 text-sm md:text-base leading-relaxed">
-						Whether you need a cutting-edge web application, a seamless user
-						experience, or just want to say hi. My inbox is always open.
+						{t("contacts.subheadline")}
 					</p>
 				</div>
 
 				<div className="flex flex-col items-start md:items-end gap-2 font-inter text-sm font-bold tracking-widest uppercase">
-					<span className="text-ink-500 mb-2">LOCAL TIME</span>
-					<span className="bg-ink-100 px-4 py-2 rounded-full tabular-nums min-w-[120px] text-center">
-						{time || "LOADING..."}
+					<span className="text-ink-500 mb-2">{t("contacts.localTime")}</span>
+					<span className="bg-ink-100 px-4 py-2 rounded-full tabular-nums min-w-30 text-center">
+						{time || t("contacts.loading")}
 					</span>
 				</div>
 			</div>
@@ -71,7 +72,7 @@ export const Contacts = () => {
 				</div>
 
 				<div className="font-inter text-[0.6rem] md:text-xs font-semibold tracking-widest text-ink-400 uppercase">
-					© {new Date().getFullYear()} DREAMER AI. ALL RIGHTS RESERVED.
+					© {new Date().getFullYear()} {t("contacts.copyright")}
 				</div>
 			</div>
 		</section>

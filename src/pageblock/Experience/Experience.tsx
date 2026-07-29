@@ -3,15 +3,22 @@
 import { motion, useScroll, useSpring } from "motion/react";
 import React, { useRef } from "react";
 import { jobsData } from "@/data/jobs";
+import { useLanguage } from "@/context/LanguageContext";
 
 const EASE = [0.2, 0.8, 0.2, 1] as const;
 
 export const Experience = () => {
+	const { t, language } = useLanguage();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
 		offset: ["start center", "end center"],
 	});
+
+	const cvFile =
+		language === "ru"
+			? "Aidar_Abdykaiymov_CV_RU.pdf"
+			: "Aidar_Abdykaiymov_CV.pdf";
 
 	const scaleY = useSpring(scrollYProgress, {
 		stiffness: 100,
@@ -29,12 +36,12 @@ export const Experience = () => {
 				<div className="hidden md:flex flex-col items-start">
 					<span className="font-koulen text-[3rem] leading-none">[02]</span>
 					<span className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-accent-orange">
-						MY JOURNEY SO FAR
+						{t("experience.sidebarTitle")}
 					</span>
 				</div>
 				<div className="flex flex-col md:items-end w-full md:w-auto">
 					<h3 className="text-[0.75rem] font-medium tracking-[0.15em] uppercase text-wash-200 mb-4 text-left md:text-right">
-						// EXPERIENCE
+						{t("experience.sectionTitle")}
 					</h3>
 					<motion.h2
 						initial={{ opacity: 0, y: 20 }}
@@ -43,7 +50,7 @@ export const Experience = () => {
 						viewport={{ once: true }}
 						className="font-koulen text-[clamp(2.5rem,6vw,4rem)] leading-none uppercase tracking-wide text-left md:text-right"
 					>
-						PROFESSIONAL EXPERIENCE
+						{t("experience.mainTitle")}
 					</motion.h2>
 				</div>
 			</div>
@@ -53,7 +60,7 @@ export const Experience = () => {
 				<div className="hidden lg:flex flex-col w-[320px] shrink-0 sticky top-32 h-fit gap-8">
 					{/* Interactive CV Download Block */}
 					<a
-						href="/Aidar_Abdykaiymov_CV.pdf"
+						href={cvFile}
 						target="_blank"
 						rel="noopener noreferrer"
 						download
@@ -76,7 +83,7 @@ export const Experience = () => {
 						</div>
 
 						<div className="absolute bottom-4 left-4 text-[0.6rem] font-bold uppercase tracking-widest text-wash-200 group-hover:text-paper-300 transition-colors duration-500 z-10">
-							GET PDF VERSION
+							{t("experience.pdfLabel")}
 						</div>
 
 						{/* Center Arrow */}
@@ -113,7 +120,7 @@ export const Experience = () => {
 									className="font-koulen tracking-[0.2em] uppercase fill-current text-ink-900 group-hover:text-main-white transition-colors duration-500"
 								>
 									<textPath href="#textPath" startOffset="0%">
-										DOWNLOAD RESUME • DOWNLOAD RESUME •
+										{t("experience.pdfSpin")}
 									</textPath>
 								</text>
 							</svg>
@@ -122,11 +129,10 @@ export const Experience = () => {
 
 					<div className="border-l border-ink-900 pl-5 py-2">
 						<p className="text-[0.7rem] font-bold uppercase tracking-widest leading-relaxed text-ink-900">
-							AVAILABLE FOR FREELANCE
+							{t("experience.freelanceLabel")}
 						</p>
 						<p className="text-[0.75rem] text-wash-200 mt-2">
-							Currently exploring new opportunities and open to collaborating on
-							ambitious projects.
+							{t("experience.freelanceDesc")}
 						</p>
 					</div>
 				</div>
@@ -160,21 +166,26 @@ export const Experience = () => {
 											{job.company}
 										</h4>
 										<p className="text-[0.8rem] text-wash-300 mt-2 font-inter">
-											{job.role}
+											{language === "ru" ? job.roleRu : job.role}
 										</p>
 									</div>
 									<div className="flex flex-col md:items-end text-left md:text-right mt-2 md:mt-0">
 										<span className="text-[0.7rem] font-bold tracking-widest uppercase text-ink-900">
-											{job.date}
+											{language === "ru" ? job.dateRu : job.date}
 										</span>
 										<span className="text-[0.65rem] tracking-widest uppercase text-wash-200 mt-1">
-											{job.location || "REMOTE"}
+											{language === "ru"
+												? job.locationRu || t("experience.remote")
+												: job.location || "REMOTE"}
 										</span>
 									</div>
 								</div>
 
 								<ul className="list-none space-y-3 mt-4 text-[0.85rem] leading-relaxed text-wash-300 max-w-2xl">
-									{job.description.map((desc, i) => (
+									{(language === "ru"
+										? job.descriptionRu
+										: job.description
+									).map((desc, i) => (
 										<li
 											key={i}
 											className="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-ink-900 before:font-bold"
