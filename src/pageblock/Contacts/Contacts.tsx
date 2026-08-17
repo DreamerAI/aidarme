@@ -38,7 +38,7 @@ export const Contacts = () => {
 					</p>
 				</div>
 
-				<div className="flex flex-col items-start md:items-end gap-2 font-inter text-sm font-bold tracking-widest uppercase">
+				<div className="hidden md:flex flex-col items-start md:items-end gap-2 font-inter text-sm font-bold tracking-widest uppercase">
 					<span className="text-ink-500 mb-2">{t("contacts.localTime")}</span>
 					<span className="bg-ink-100 px-4 py-2 rounded-full tabular-nums min-w-30 text-center">
 						{time || t("contacts.loading")}
