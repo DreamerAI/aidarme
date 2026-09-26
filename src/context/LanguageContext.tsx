@@ -1,14 +1,27 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import type React from "react";
+import {
+	createContext,
+	useCallback,
+	useContext,
+	useEffect,
+	useState,
+} from "react";
 import translationsData from "@/data/translations.json";
 
 export type Language = "en" | "ru";
 
+type TranslationValue =
+	| string
+	| string[]
+	| { [key: string]: TranslationValue };
+
 type LanguageContextType = {
 	language: Language;
 	setLanguage: (lang: Language) => void;
-	t: (key: string) => any;
+	t: (key: string) => string;
+	tList: (key: string) => string[];
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -23,7 +36,28 @@ export const useLanguage = () => {
 	return context;
 };
 
-const translations = translationsData as Record<Language, Record<string, any>>;
+const translations = translationsData as Record<Language, TranslationValue>;
+
+const resolveTranslation = (
+	language: Language,
+	keys: string[],
+): TranslationValue | undefined => {
+	let current = translations[language];
+
+	for (const key of keys) {
+		if (
+			typeof current !== "object" ||
+			Array.isArray(current) ||
+			!(key in current)
+		) {
+			return undefined;
+		}
+
+		current = current[key];
+	}
+
+	return current;
+};
 
 export const LanguageProvider = ({
 	children,
@@ -38,8 +72,7 @@ export const LanguageProvider = ({
 		if (savedLang === "en" || savedLang === "ru") {
 			setLanguageState(savedLang);
 		} else {
-			const browserLang =
-				navigator.language || (navigator as any).userLanguage || "";
+			const browserLang = navigator.language || "";
 			if (browserLang.toLowerCase().startsWith("ru")) {
 				setLanguageState("ru");
 			} else {
@@ -49,31 +82,37 @@ export const LanguageProvider = ({
 		setMounted(true);
 	}, []);
 
-	const setLanguage = (lang: Language) => {
+	const setLanguage = useCallback((lang: Language) => {
 		setLanguageState(lang);
 		localStorage.setItem("portfolio_lang", lang);
-	};
+	}, []);
 
-	const t = (keyPath: string) => {
-		const keys = keyPath.split(".");
-		let current: any = translations[language];
-		for (const key of keys) {
-			if (current && key in current) {
-				current = current[key];
-			} else {
-				let fallback: any = translations["en"];
-				for (const fallbackKey of keys) {
-					if (fallback && fallbackKey in fallback) {
-						fallback = fallback[fallbackKey];
-					} else {
-						return keyPath;
-					}
-				}
-				return fallback;
-			}
-		}
-		return current;
-	};
+	const getTranslation = useCallback(
+		(keyPath: string) => {
+			const keys = keyPath.split(".");
+			return (
+				resolveTranslation(language, keys) ??
+				resolveTranslation("en", keys)
+			);
+		},
+		[language],
+	);
+
+	const t = useCallback(
+		(keyPath: string) => {
+			const translation = getTranslation(keyPath);
+			return typeof translation === "string" ? translation : keyPath;
+		},
+		[getTranslation],
+	);
+
+	const tList = useCallback(
+		(keyPath: string) => {
+			const translation = getTranslation(keyPath);
+			return Array.isArray(translation) ? translation : [];
+		},
+		[getTranslation],
+	);
 
 	useEffect(() => {
 		if (mounted) {
@@ -83,10 +122,10 @@ export const LanguageProvider = ({
 				metaDesc.setAttribute("content", t("metadata.description"));
 			}
 		}
-	}, [language, mounted]);
+	}, [mounted, t]);
 
 	return (
-		<LanguageContext.Provider value={{ language, setLanguage, t }}>
+		<LanguageContext.Provider value={{ language, setLanguage, t, tList }}>
 			{children}
 		</LanguageContext.Provider>
 	);

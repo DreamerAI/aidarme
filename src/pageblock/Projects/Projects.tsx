@@ -1,23 +1,27 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import React, { useRef } from "react";
-import Image from "next/image";
+import { useRef } from "react";
 import { projectsData } from "@/data/projects";
-import { TransitionLink } from "@/components/utils/TransitionLinks";
 import { useLanguage } from "@/context/LanguageContext";
+import { ProjectCard } from "./components/ProjectCard";
 
 const EASE = [0.2, 0.8, 0.2, 1] as const;
 
+// Extra scroll room keeps the pinned section from feeling cut off while the
+// first and last cards are still entering/leaving the viewport.
+const SCROLL_VIEWPORTS = 1 + projectsData.length * 0.8;
+
 export const Projects = () => {
 	const { t, language } = useLanguage();
-	const targetRef = useRef<HTMLDivElement>(null);
+	const targetRef = useRef<HTMLElement>(null);
 	const { scrollYProgress } = useScroll({
 		target: targetRef,
 		offset: ["start start", "end end"],
 	});
 
-	// We must use matching string templates for Framer Motion to interpolate properly!
+	// The percentage refers to the track width, while the viewport correction
+	// keeps the final card fully visible without hardcoding card widths.
 	const x = useTransform(
 		scrollYProgress,
 		[0, 1],
@@ -28,12 +32,16 @@ export const Projects = () => {
 		<section
 			id="projects"
 			ref={targetRef}
-			className="relative w-full bg-ink-900 text-main-white md:h-[400vh]"
+			className="relative w-full bg-ink-900 text-main-white md:h-[calc(var(--project-scroll-vh)*1vh)]"
+			style={
+				{
+					"--project-scroll-vh": `${SCROLL_VIEWPORTS * 100}`,
+				} as React.CSSProperties
+			}
 		>
-			<div className="md:sticky md:top-0 md:h-screen flex flex-col justify-center overflow-hidden py-20 md:py-0">
-				{/* Section Header */}
-				<div className="px-6 md:px-20 mb-10 md:mb-16 shrink-0">
-					<h3 className="text-[0.75rem] font-medium tracking-[0.15em] uppercase text-wash-200 mb-4">
+			<div className="flex flex-col justify-center py-20 md:sticky md:top-0 md:h-screen md:py-0">
+				<div className="mb-10 shrink-0 px-6 md:mb-12 md:px-20">
+					<h3 className="mb-4 text-[0.75rem] font-medium tracking-[0.15em] text-wash-200 uppercase">
 						{t("projects.sectionTitle")}
 					</h3>
 					<motion.h2
@@ -41,88 +49,42 @@ export const Projects = () => {
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6, ease: EASE }}
 						viewport={{ once: true }}
-						className="font-koulen text-[clamp(3rem,8vw,6rem)] leading-none uppercase tracking-wide"
+						className="font-koulen text-[clamp(3rem,8vw,6rem)] leading-none tracking-wide uppercase"
 					>
 						{t("projects.mainTitle")}
 					</motion.h2>
 				</div>
 
-				{/* Projects Track */}
-				<div className="w-full overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none no-scrollbar">
+				<div className="no-scrollbar w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-2 md:snap-none md:overflow-x-visible md:pb-0">
 					<motion.div
-						className="flex gap-6 md:gap-16 px-6 md:px-20 w-max max-md:transform-none!"
+						className="flex w-max gap-6 px-6 md:gap-16 md:px-20 max-md:transform-none!"
 						style={{ x }}
 					>
-						{projectsData.map((project, i) => (
-							<TransitionLink
-								href={`/projects/${project.id}`}
+						{projectsData.map((project, index) => (
+							<ProjectCard
 								key={project.id}
-								className="block group relative w-[85vw] md:w-[45vw] lg:w-[35vw] h-[50vh] md:h-[60vh] shrink-0 snap-center rounded-lg overflow-hidden cursor-pointer bg-ink-800 border border-ink-700 hover:border-paper-300 transition-colors duration-500"
-							>
-								{/* Background Image */}
-								<div
-									className="absolute inset-0 bg-ink-800 overflow-hidden"
-									style={{ viewTransitionName: `project-img-${project.id}` }}
-								>
-									<Image
-										src={project.image}
-										alt={project.title}
-										fill
-										className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-110 grayscale-50 group-hover:grayscale-0 opacity-60 group-hover:opacity-100"
-										sizes="(max-width: 768px) 85vw, (max-width: 1024px) 45vw, 35vw"
-									/>
-									{/* Overlay Gradient */}
-									<div className="absolute inset-0 bg-linear-to-t from-ink-900 via-ink-900/40 to-transparent group-hover:opacity-60 transition-opacity duration-500" />
-								</div>
-
-								{/* Content Overlay */}
-								<div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between">
-									{/* Top Row: Category and Year */}
-									<div className="flex justify-between items-start overflow-hidden">
-										<div className="overflow-hidden">
-											<span className="inline-block font-inter text-[0.65rem] font-bold tracking-widest uppercase text-main-white bg-ink-900/50 backdrop-blur-md px-4 py-2 rounded-full translate-y-[-150%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]">
-												{language === "ru"
-													? project.categoryRu
-													: project.category}
-											</span>
-										</div>
-										<div className="overflow-hidden">
-											<span className="inline-block font-koulen text-xl text-main-white translate-y-[-150%] group-hover:translate-y-0 transition-transform duration-500 delay-75 ease-[cubic-bezier(0.2,0.8,0.2,1)]">
-												{project.year}
-											</span>
-										</div>
-									</div>
-
-									{/* Bottom Row: Title and Description */}
-									<div>
-										<div className="overflow-hidden">
-											<h3
-												className="font-koulen text-[clamp(2.5rem,5vw,4.5rem)] leading-none text-main-white translate-y-[20%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
-												style={{
-													viewTransitionName: `project-title-${project.id}`,
-													width: "fit-content",
-												}}
-											>
-												{project.title}
-											</h3>
-										</div>
-										<p className="font-inter text-[0.8rem] text-paper-200 mt-3 max-w-sm opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100 ease-[cubic-bezier(0.2,0.8,0.2,1)]">
-											{language === "ru"
-												? project.descriptionRu
-												: project.description}
-										</p>
-									</div>
-								</div>
-
-								{/* View Project Button (Mobile Only) */}
-								<div className="absolute top-4 right-4 md:hidden">
-									<span className="font-inter text-[0.6rem] font-bold tracking-widest uppercase text-main-white bg-accent-orange px-3 py-1.5 rounded-full">
-										{t("projects.view")}
-									</span>
-								</div>
-							</TransitionLink>
+								project={project}
+								index={index}
+								language={language}
+								viewLabel={t("projects.view")}
+							/>
 						))}
 					</motion.div>
+				</div>
+
+				<div
+					className="mt-10 hidden items-center gap-5 px-6 md:flex md:px-20"
+					aria-hidden="true"
+				>
+					<span className="font-inter text-[0.65rem] font-bold tracking-widest text-wash-200 uppercase">
+						{String(projectsData.length).padStart(2, "0")}
+					</span>
+					<div className="h-px flex-1 bg-ink-700">
+						<motion.div
+							className="h-full origin-left bg-paper-300"
+							style={{ scaleX: scrollYProgress }}
+						/>
+					</div>
 				</div>
 			</div>
 		</section>

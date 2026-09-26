@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { useLanguage } from "@/context/LanguageContext";
-import { Project } from "@/data/projects";
+import { ResilientImage } from "@/components/shared/ResilientImage";
+import type { Project } from "@/data/projects";
 
 type Props = {
 	project: Project;
@@ -14,11 +14,10 @@ export default function ProjectPageClient({ project }: Props) {
 
 	return (
 		<main className="min-h-screen bg-ink-900 text-main-white font-inter">
-			{/* Back Button */}
-			<div className="fixed top-8 left-8 md:top-12 md:left-12 z-50">
+			<div className="fixed top-20 right-6 left-6 z-50 flex justify-start md:top-8 md:right-auto md:left-8 md:block">
 				<Link
-					href="/"
-					className="flex items-center gap-2 group bg-ink-900/50 backdrop-blur-md px-4 py-2 rounded-full border border-ink-700 hover:bg-main-white hover:text-ink-900 transition-colors duration-300"
+					href="/#projects"
+					className="flex w-fit items-center gap-2 rounded-full border border-ink-700 bg-ink-900/70 px-4 py-2 backdrop-blur-md transition-colors duration-300 group hover:bg-main-white hover:text-ink-900 focus-visible:bg-main-white focus-visible:text-ink-900"
 				>
 					<svg
 						width="20"
@@ -27,6 +26,7 @@ export default function ProjectPageClient({ project }: Props) {
 						fill="none"
 						stroke="currentColor"
 						strokeWidth="2"
+						aria-hidden="true"
 						className="group-hover:-translate-x-1 transition-transform"
 					>
 						<path d="M19 12H5M12 19l-7-7 7-7" />
@@ -43,7 +43,7 @@ export default function ProjectPageClient({ project }: Props) {
 					className="absolute inset-0 overflow-hidden"
 					style={{ viewTransitionName: `project-img-${project.id}` }}
 				>
-					<Image
+					<ResilientImage
 						src={project.image}
 						alt={project.title}
 						fill
@@ -76,8 +76,7 @@ export default function ProjectPageClient({ project }: Props) {
 				</div>
 			</section>
 
-			{/* Content Section */}
-			<section className="px-8 py-16 md:px-20 md:py-24 max-w-350 mx-auto">
+			<section className="mx-auto max-w-350 px-8 py-16 md:px-20 md:py-24">
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20">
 					<div className="md:col-span-2">
 						<h2 className="font-koulen text-3xl mb-6 tracking-wide">
@@ -105,15 +104,14 @@ export default function ProjectPageClient({ project }: Props) {
 				</div>
 			</section>
 
-			{/* Gallery Section */}
-			<section className="px-8 pb-24 md:px-20 md:pb-32 max-w-350 mx-auto">
+			<section className="mx-auto max-w-350 px-8 pb-24 md:px-20 md:pb-32">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					{project.galleryImages.map((img, idx) => (
 						<div
 							key={idx}
 							className={`relative w-full rounded-xl overflow-hidden bg-ink-800 border border-ink-700 ${idx === 2 ? "md:col-span-2 aspect-21/9" : "aspect-video"}`}
 						>
-							<Image
+							<ResilientImage
 								src={img}
 								alt={`${project.title} gallery image ${idx + 1}`}
 								fill

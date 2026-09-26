@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import React from "react";
+import type React from "react";
 
 const EASE = [0.2, 0.8, 0.2, 1] as const;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "next-view-transitions";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 type TransitionLinkProps = ComponentProps<typeof Link>;
 

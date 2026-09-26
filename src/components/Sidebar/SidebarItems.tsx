@@ -1,5 +1,5 @@
 import { Link } from "next-view-transitions";
-import React from "react";
+import type React from "react";
 
 type Props = {
 	children: React.ReactNode;

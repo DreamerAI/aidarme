@@ -1,7 +1,3 @@
 export default function Template({ children }: { children: React.ReactNode }) {
-	return (
-		<>
-			<div className="page-enter-delay">{children}</div>
-		</>
-	);
+	return <div className="page-enter-delay">{children}</div>;
 }

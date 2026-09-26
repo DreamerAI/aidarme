@@ -1,4 +1,4 @@
-import { NextConfig } from "next";
+import type { NextConfig } from "next";
 
 /** @type {import('next/dist/next-server/server/config').NextConfig} */
 const nextConfig: NextConfig = {

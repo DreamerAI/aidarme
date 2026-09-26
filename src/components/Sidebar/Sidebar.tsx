@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { SidebarItems } from "./SidebarItems";
 import {
@@ -10,8 +10,6 @@ import {
 	Portfolio,
 	Skills,
 } from "@/assets/icons";
-
-type Props = {};
 
 const sidebarItemsIcons = [
 	{
@@ -32,7 +30,7 @@ const sidebarItemsIcons = [
 	},
 ];
 
-export const Sidebar = (props: Props) => {
+export const Sidebar = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
 
 	const toggleMobileSidebar = () => {
@@ -60,7 +58,7 @@ export const Sidebar = (props: Props) => {
 						</SidebarItems>
 					))}
 				</ul>
-				<button onClick={toggleMobileSidebar}>
+				<button type="button" onClick={toggleMobileSidebar}>
 					{showSidebar ? (
 						<div className="group w-12 h-12 bg-white rounded-xl flex justify-center items-center shadow-[0px_0px_5px_2px_#cbd5e0] hover:bg-main-dark hover:text-white duration-500 transition-all">
 							<ArrowBottom className="w-10 h-10" />

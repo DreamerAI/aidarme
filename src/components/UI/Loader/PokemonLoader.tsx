@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const PokemonLoader = () => {
 	const [isLoading, setIsLoading] = useState(true);

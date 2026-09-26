@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { useRef, useState } from "react";
-import React from "react";
+import type React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export const PokeballButton = () => {
@@ -39,6 +39,7 @@ export const PokeballButton = () => {
 			<svg
 				viewBox="0 0 100 100"
 				className="absolute inset-0 w-full h-full grayscale group-hover:grayscale-0 transition-[filter] duration-500"
+				aria-hidden="true"
 			>
 				<circle
 					cx="50"

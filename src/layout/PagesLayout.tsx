@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { InView } from "react-intersection-observer";
+import type React from "react";
 
 type Props = {
 	children: React.ReactNode;

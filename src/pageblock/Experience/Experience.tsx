@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "motion/react";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { jobsData } from "@/data/jobs";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -76,6 +76,7 @@ export const Experience = () => {
 								fill="none"
 								stroke="currentColor"
 								strokeWidth="1"
+								aria-hidden="true"
 							>
 								<circle cx="12" cy="12" r="10" />
 								<path d="M12 2v20M2 12h20" />
@@ -95,6 +96,7 @@ export const Experience = () => {
 								fill="none"
 								stroke="currentColor"
 								strokeWidth="1.5"
+								aria-hidden="true"
 							>
 								<path d="M12 4v16m0 0l-6-6m6 6l6-6" />
 							</svg>
@@ -109,6 +111,7 @@ export const Experience = () => {
 							<svg
 								viewBox="0 0 100 100"
 								className="w-full h-full text-ink-900 group-hover:text-main-white transition-colors duration-500"
+								aria-hidden="true"
 							>
 								<path
 									id="textPath"

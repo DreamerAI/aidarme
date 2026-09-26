@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, MotionValue, useTransform } from "motion/react";
+import { motion, type MotionValue, useTransform } from "motion/react";
 
 type Props = {
 	text: string;

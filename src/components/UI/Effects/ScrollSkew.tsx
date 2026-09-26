@@ -7,7 +7,7 @@ import {
 	useSpring,
 	useTransform,
 } from "motion/react";
-import React from "react";
+import type React from "react";
 
 export const ScrollSkew = ({ children }: { children: React.ReactNode }) => {
 	const { scrollY } = useScroll();

@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, MotionValue } from "motion/react";
-import { CSSProperties } from "react";
+import { motion, type MotionValue } from "motion/react";
+import type { CSSProperties } from "react";
 import { HighlightedTitle } from "./HighlightedTitle";
 import { useLanguage } from "@/context/LanguageContext";
 

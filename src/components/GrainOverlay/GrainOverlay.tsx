@@ -6,7 +6,7 @@ export const GrainOverlay = () => {
 
 			{/* 2. Шум */}
 			<div className="absolute inset-0 opacity-[0.14] mix-blend-overlay">
-				<svg className="h-full w-full">
+				<svg className="h-full w-full" aria-hidden="true">
 					<filter id="cinematicNoise">
 						<feTurbulence
 							type="fractalNoise"

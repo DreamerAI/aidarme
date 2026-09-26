@@ -9,7 +9,7 @@ function ScrollRestoration() {
 	const lenis = useLenis();
 
 	useEffect(() => {
-		if (lenis) {
+		if (pathname && lenis) {
 			lenis.scrollTo(0, { immediate: true });
 		}
 	}, [pathname, lenis]);

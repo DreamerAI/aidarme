@@ -17,6 +17,11 @@
 			"role": "Frontend Engineer",
 			"name": "Aidar Abdykaiymov",
 			"infoTitle": "Info",
+			"sections": {
+				"profile": "Profile",
+				"techStack": "Tech Stack",
+				"languages": "Languages"
+			},
 			"bio": "Frontend Engineer with 4+ years of commercial experience building scalable products, design systems and high-performance web applications. I focus on writing clean code, creating great user experiences and solving complex problems. My journey into frontend actually started because I wanted to build a browser-based Pokémon game! Fun fact: my absolute favorite is",
 			"pokemon": "Tepig",
 			"techLabel": {
@@ -90,6 +95,11 @@
 			"role": "Фронтенд-разработчик",
 			"name": "Айдар Абдыкайымов",
 			"infoTitle": "Инфо",
+			"sections": {
+				"profile": "Профиль",
+				"techStack": "Стек технологий",
+				"languages": "Языки"
+			},
 			"bio": "Фронтенд-инженер с более чем 4 годами коммерческого опыта в создании масштабируемых продуктов, дизайн-систем и высокопроизводительных веб-приложений. Я фокусируюсь на написании чистого кода, создании отличного пользовательского опыта и решении сложных задач. Мой путь во фронтенд начался с желания создать браузерную игру про покемонов! Забавный факт: мой самый любимый покемон —",
 			"pokemon": "Тепиг",
 			"techLabel": {
