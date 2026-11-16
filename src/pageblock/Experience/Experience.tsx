@@ -63,7 +63,6 @@ export const Experience = () => {
 						href={cvFile}
 						target="_blank"
 						rel="noopener noreferrer"
-						download
 						className="group relative w-full aspect-square border border-paper-300 flex items-center justify-center overflow-hidden hover:border-ink-900 transition-colors duration-500 cursor-pointer bg-main-white"
 					>
 						{/* Background Fill Animation */}
@@ -119,10 +118,15 @@ export const Experience = () => {
 									fill="none"
 								/>
 								<text
-									fontSize="10.5"
-									className="font-koulen tracking-[0.2em] uppercase fill-current text-ink-900 group-hover:text-main-white transition-colors duration-500"
+									fontSize="9"
+									className="font-koulen uppercase fill-current text-ink-900 group-hover:text-main-white transition-colors duration-500"
 								>
-									<textPath href="#textPath" startOffset="0%">
+									<textPath
+										href="#textPath"
+										startOffset="0%"
+										textLength="205"
+										lengthAdjust="spacingAndGlyphs"
+									>
 										{t("experience.pdfSpin")}
 									</textPath>
 								</text>
